@@ -23,7 +23,7 @@
     <ul>
         {% for expense in expenses %}
         <li>
-            {{expense[1]}} - ${{ expense[2] }} - {{ expense[3] }} <a href="/delete/{{expense[0]}}">Delete</a>
+            {{expense[1]}} - ${{ expense[2] }} - {{ expense[3] }} <a href="/edit/{{ expense[0] }}"> Edit </a>  | <a href="/delete/{{expense[0]}}">Delete</a>
         </li>
         {% endfor %}
     </ul>

@@ -36,3 +36,20 @@ def delete_expenses(expense_id):
     conn.commit()
     cursor.close()
     conn.close()
+
+def update_expenses(expense_id,title,amount,category):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('update expenses set title=%s, amount=%s, category=%s where id=%s',(title,amount,category,expense_id))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_expense(expense_id):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('select id,title,amount,category from expenses where id=%s',(expense_id,))
+    expense=cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return expense

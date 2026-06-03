@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h1>Edit Expense</h1>
+    <form method="POST">
+        <input type="text" name="title" value="{{ expense[1] }}">
+        <input type="number" name="amount" value="{{ expense[2] }}">
+        <input type="text" name="category" value="{{ expense[3] }}">
+        <button type="submit"> Save </button>
+    </form>
+</body>
+</html>
