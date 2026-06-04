@@ -1,60 +1,68 @@
-💸 Expense Tracker
+# SpendWise — Expense Tracker
 
-> 🚧 Currently in progress
-
-A web-based Expense Tracker built with Flask and PostgreSQL.
-This project is part of my Python backend development journey,
-focusing on real-world CRUD operations and database integration.
+A full-stack web application to track your daily expenses, built with
+Flask and PostgreSQL. Features a clean UI with user authentication,
+category breakdown, and real-time search.
 
 ---
 
-✨ Features (so far)
+## Features
 
+- User Registration & Login (with password hashing)
 - Add expenses with title, amount and category
-- View all expenses on homepage
-- Delete expenses
-- Data stored in PostgreSQL database
+- Edit & Delete expenses
+- Search by title or category
+- Category-wise breakdown with visual progress bars
+- Total spent & transaction count dashboard
+- Session-based authentication with Logout
 
 ---
 
-🛠️ Tech Stack
+## Tech Stack
 
-- **Language:** Python 3
-- **Framework:** Flask
-- **Database:** PostgreSQL
-- **Frontend:** HTML, Jinja2 Templates
-- **Concepts:** REST routes, OOP, CRUD operations
+| Layer | Tech |
+|-------|------|
+| Backend | Python, Flask |
+| Database | PostgreSQL |
+| Frontend | HTML, CSS, Jinja2 |
+| Auth | Werkzeug (password hashing) |
+| Fonts | Google Fonts (DM Sans, Syne) |
 
 ---
 
-📂 Project Structure
-
+## Project Structure
 expense-tracker/
 ├── files/
-│   ├── templates/
-│   │   ├── home.html
-│   │   └── about.html
-│   ├── app.py
-│   └── database.py
-├── .env
 ├── .gitignore
-└── venv/
+└── README.md
 
 ---
 
-🚀 How to Run
+## How to Run
 
 1. Clone the repo
-2. Create a virtual environment
+```bash
+git clone https://github.com/harshanrepo/expense-tracker.git
+cd expense-tracker
+```
+
+2. Create and activate virtual environment
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
+
 3. Install dependencies
 ```bash
-pip install flask psycopg2-binary python-dotenv
+pip install flask psycopg2-binary python-dotenv werkzeug
 ```
-4. Add your PostgreSQL credentials in `.env`
+
+4. Create a `.env` file with your PostgreSQL credentials
+DB_HOST=localhost
+DB_NAME=your_db_name
+DB_USER=your_username
+DB_PASSWORD=your_password
+
 5. Run the app
 ```bash
 python files/app.py
@@ -62,17 +70,17 @@ python files/app.py
 
 ---
 
-🔮 Planned Features
+## Planned Features
 
-- [ ] Edit existing expenses
-- [ ] Filter by category
-- [ ] Monthly summary / charts
-- [ ] User login system
+- [ ] Monthly expense summary
+- [ ] Charts and analytics
+- [ ] Export to CSV
+- [ ] Budget limit alerts
 
 ---
 
-👨‍💻 Author
+## Author
 
-**Harshan** | CSE Student | Chennai
+**Shri Harshan M** | CS Graduate | Chennai
 🔗 [LinkedIn](https://linkedin.com/in/mrshri-harshan) |
 🐙 [GitHub](https://github.com/harshanrepo)
