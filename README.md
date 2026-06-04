@@ -1,4 +1,4 @@
-# 💸 SpendWise — Expense Tracker
+# SpendWise — Expense Tracker
 
 A full-stack web application to track your daily expenses, built with
 Flask and PostgreSQL. Features a clean UI with user authentication,
@@ -6,19 +6,19 @@ category breakdown, and real-time search.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 User Registration & Login (with password hashing)
-- ➕ Add expenses with title, amount and category
-- ✏️ Edit & Delete expenses
-- 🔍 Search by title or category
-- 📊 Category-wise breakdown with visual progress bars
-- 💰 Total spent & transaction count dashboard
-- 🚪 Session-based authentication with Logout
+- User Registration & Login (with password hashing)
+- Add expenses with title, amount and category
+- Edit & Delete expenses
+- Search by title or category
+- Category-wise breakdown with visual progress bars
+- Total spent & transaction count dashboard
+- Session-based authentication with Logout
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Tech |
 |-------|------|
@@ -30,7 +30,7 @@ category breakdown, and real-time search.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 expense-tracker/
 ├── files/
 ├── .gitignore
@@ -38,7 +38,7 @@ expense-tracker/
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 1. Clone the repo
 ```bash
@@ -70,7 +70,7 @@ python files/app.py
 
 ---
 
-## 🔮 Planned Features
+## Planned Features
 
 - [ ] Monthly expense summary
 - [ ] Charts and analytics
@@ -79,7 +79,7 @@ python files/app.py
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Shri Harshan M** | CS Graduate | Chennai
 🔗 [LinkedIn](https://linkedin.com/in/mrshri-harshan) |
