@@ -31,10 +31,26 @@ category breakdown, and real-time search.
 ---
 
 ## Project Structure
+```
 expense-tracker/
 ├── files/
+│   ├── templates/
+│   │   ├── home.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── edit.html
+│   │   └── about.html
+│   ├── static/
+│   │   └── style.css
+│   ├── app.py
+│   └── database.py
+├── screenshots/
+│   ├── dashboard.png
+│   ├── login.png
+│   └── breakdown.png
 ├── .gitignore
 └── README.md
+```
 
 ---
 
