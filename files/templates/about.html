@@ -1,9 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>About</title>
+    <title>SpendWise — About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>About Expense Tracker</h1>
+
+    <div class="app">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <div class="logo-text">Spend<span class="logo-dot">Wise</span></div>
+            </div>
+            <div class="welcome-badge">Hey, <span>{{ name }}</span> 👋</div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link active" href="/about">About</a>
+            <a class="nav-link logout" href="/logout">Logout</a>
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="about-hero">
+            <div class="about-hero-icon">💰</div>
+            <div class="about-hero-title">SpendWise</div>
+            <div class="about-hero-sub">A simple, clean expense tracker to help you stay on top of your money.</div>
+            <div class="about-version">v1.0.0</div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="about-features">
+            <div class="feature-card">
+    
+                <div class="feature-title">Add Expenses</div>
+                <div class="feature-text">Quickly log expenses with a title, amount, and category in seconds.</div>
+            </div>
+            <div class="feature-card">
+              
+                <div class="feature-title">Search</div>
+                <div class="feature-text">Find any expense instantly by title or category.</div>
+            </div>
+            <div class="feature-card">
+   
+                <div class="feature-title">Breakdown</div>
+                <div class="feature-text">Visual category-wise breakdown to see where your money goes.</div>
+            </div>
+            <div class="feature-card">
+  
+                <div class="feature-title">Edit & Delete</div>
+                <div class="feature-text">Fix mistakes or remove entries anytime with ease.</div>
+            </div>
+        </div>
+
+        <div class="about-grid">
+
+            <!-- Built With -->
+            <div class="panel">
+                <div class="panel-title">Built With</div>
+                <div class="tech-row">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">SQLite</span>
+                    <span class="tech-badge">Jinja2</span>
+                    <span class="tech-badge">HTML/CSS</span>
+                </div>
+            </div>
+
+            <!-- Developer -->
+            <div class="panel">
+                <div class="panel-title">Developer</div>
+                <div class="dev-card">
+                    <div>
+                        <div class="dev-name">Shri harshan M</div>
+                        <div class="dev-desc">CS Graduate passionate about building clean, functional web apps.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="about-footer">
+            Built Using Python & Flask &nbsp;·&nbsp; SpendWise © 2025
+        </div>
+
+    </div>
+
 </body>
+
 </html>

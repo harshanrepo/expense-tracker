@@ -12,18 +12,18 @@ def get_connection():
         password=os.getenv("DB_PASSWORD")
     )
 
-def add_expenses(title,amount,category):
+def add_expenses(title,amount,category,user_id):
     conn=get_connection()
     cursor=conn.cursor()
-    cursor.execute("INSERT INTO expenses(title, amount, category) VALUES (%s, %s, %s)",(title, amount, category))
+    cursor.execute("INSERT INTO expenses(title, amount, category,user_id) VALUES (%s, %s, %s,%s)",(title, amount, category,user_id))
     conn.commit()
     cursor.close()
     conn.close()
 
-def get_expenses():
+def get_expenses(user_id):
     conn=get_connection()
     cursor=conn.cursor()
-    cursor.execute('select id,title,amount,category from expenses')
+    cursor.execute('select id,title,amount,category from expenses where user_id=%s',(user_id,))
     expenses=cursor.fetchall()
     cursor.close()
     conn.close()
@@ -53,3 +53,38 @@ def get_expense(expense_id):
     cursor.close()
     conn.close()
     return expense
+
+def search_expense(search_term,user_id):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('select id,title,amount,category from expenses where user_id=%s and (title ILIKE %s or category ILIKE %s)',(user_id,f'%{search_term}%',f'%{search_term}%'))
+    expenses=cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return expenses 
+
+def get_category_expenses(user_id):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('select category,sum(amount) from expenses where user_id=%s group by category ORDER BY SUM(amount) DESC',(user_id,))
+    category_expenses=cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return category_expenses
+
+def create_user(username,password_hash):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('insert into users(username,password) values(%s,%s)',(username,password_hash))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_user_by_username(username):
+    conn=get_connection()
+    cursor=conn.cursor()
+    cursor.execute('select id,username,password from users where username ILIKE %s',(username,))
+    user=cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return user

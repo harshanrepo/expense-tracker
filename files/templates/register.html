@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SpendWise — Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-logo">
+            <div class="logo-icon">💰</div>
+            <div class="logo-text">Spend<span class="logo-dot">Wise</span></div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-title">Create Account 🚀</div>
+            <div class="auth-sub">Start tracking your expenses today</div>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input class="form-input" type="text" name="username" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input class="form-input" type="password" name="password" placeholder="Choose a password" required>
+                </div>
+
+                {% if error %}
+                <div class="auth-error">⚠️ {{ error }}</div>
+                {% endif %}
+
+                <button class="submit-btn" type="submit">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="/login">Login here</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

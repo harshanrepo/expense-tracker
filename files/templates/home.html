@@ -1,32 +1,150 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Expense Tracker</title>
+    <title>SpendWise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 </head>
+    
+
 <body>
-    <h1>Welcome to Expense Tracker</h1>
-    <h2>Welcome {{ name }}</h2>
-    <h3>Add Expenses</h3>
-    <form method="POST">
-        <label>Title</label>
-        <input type="text" name="title">
-        <br><br>
-        <label>Amount</label>
-        <input type="number" name="amount">
-        <br><br>
-        <label>Category</label>
-        <input type="text" name="category">
-        <br><br>
-        <button type="submit">Add Expenses</button>
-    </form>
-    <h3>Expenses</h3>
-    <ul>
-        {% for expense in expenses %}
-        <li>
-            {{expense[1]}} - ${{ expense[2] }} - {{ expense[3] }} <a href="/edit/{{ expense[0] }}"> Edit </a>  | <a href="/delete/{{expense[0]}}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
+
+    <div class="app">
+        
+
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <div class="logo-text">Spend<span class="logo-dot">Wise</span></div>
+            </div>
+            <div class="welcome-badge">Hey, <span>{{ name }}</span> 👋</div>
+        </div>
+
+        <div class="navbar">
+            <a class="nav-link active" href="/">Dashboard</a>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link logout" href="/logout">Logout</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card highlight">
+                <div class="stat-label">Total Spent</div>
+                <div class="stat-value">₹{{ total_amount }}</div>
+                <div class="stat-sub">This month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Transactions</div>
+                <div class="stat-value">{{ expenses | length }}</div>
+                <div class="stat-sub">Entries logged</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Categories</div>
+                <div class="stat-value">{{ category_expenses | length }}</div>
+                <div class="stat-sub">Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Top Category</div>
+                <div class="stat-value top-cat">
+                    {% if category_expenses %}
+                        {{ category_expenses[0][0] }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </div>
+                <div class="stat-sub">
+                    {% if category_expenses %}
+                        ₹{{ category_expenses[0][1] }} spent
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <form method="get" class="search-bar">
+            <input class="search-input" type="text" name="search"
+                value="{{ search if search else '' }}"
+                placeholder="Search by title or category…">
+            <button class="search-btn" type="submit">Search</button>
+        </form>
+
+        <div class="main-grid">
+            <div class="panel">
+                <div class="panel-title">Add Expense</div>
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input class="form-input" type="text" name="title" placeholder="e.g. Coffee, Petrol…" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹)</label>
+                        <input class="form-input" type="number" name="amount" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <input class="form-input" type="text" name="category" placeholder="e.g. Food, Transport…" required>
+                    </div>
+                    <button class="submit-btn" type="submit">Add Expense</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Category Breakdown</div>
+                {% if category_expenses %}
+                    {% set max_amt = category_expenses[0][1] %}
+                    {% for item in category_expenses %}
+                    <div class="cat-row">
+                        <span class="cat-name">{{ item[0] }}</span>
+                        <div class="cat-bar-wrap">
+                            <div class="cat-bar" style="width: {{ ((item[1] | float / max_amt | float) * 100) | int }}%"></div>
+                        </div>
+                        <span class="cat-amt">₹{{ item[1] }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="empty-msg">No expenses yet. Add one to see your breakdown!</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="full-panel">
+            <div class="panel-title">All Expenses</div>
+            {% if expenses %}
+            <table class="expense-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense[1] }}</td>
+                        <td class="amount-cell">₹{{ expense[2] }}</td>
+                        <td><span class="cat-badge">{{ expense[3] }}</span></td>
+                        <td>
+                            <a class="action-link" href="/edit/{{ expense[0] }}">Edit</a>
+                            <span class="divider">|</span>
+                            <a class="action-link del" href="/delete/{{ expense[0] }}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="empty-msg">No expenses found. Try a different search or add a new one.</p>
+            {% endif %}
+        </div>
+
+    </div>
 
 </body>
+
 </html>
