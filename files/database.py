@@ -10,6 +10,7 @@ def get_connection():
         database=os.getenv("DB_NAME"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD")
+        port=os.getenv("DB_PORT", "5432")
     )
 
 def add_expenses(title,amount,category,user_id):
@@ -19,6 +20,7 @@ def add_expenses(title,amount,category,user_id):
     conn.commit()
     cursor.close()
     conn.close()
+
 
 def get_expenses(user_id):
     conn=get_connection()
