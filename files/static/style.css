@@ -664,5 +664,16 @@ body {
         overflow-x: auto;
         white-space: nowrap;
     }
+    .auth-card {
+        padding: 1.25rem;
+    }
+
+    .about-hero {
+        padding: 1.5rem 1rem;
+    }
+
+    .about-hero-title {
+        font-size: 22px;
+    }
 
 }

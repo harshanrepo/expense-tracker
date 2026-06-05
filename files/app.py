@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from files.database import add_expenses, get_expenses, delete_expenses, update_expenses, get_expense, search_expense, get_category_expenses, create_user, get_user_by_username
+from database import add_expenses, get_expenses, delete_expenses, update_expenses, get_expense, search_expense, get_category_expenses, create_user, get_user_by_username
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
 import os
