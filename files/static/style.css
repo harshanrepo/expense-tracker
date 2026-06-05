@@ -54,7 +54,7 @@ body {
 .app {
     max-width: 960px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 1rem;
 }
 
 .header {
@@ -632,4 +632,37 @@ body {
     font-size: 12px;
     color: #aaa;
     padding: 1rem 0 0.5rem;
+}
+@media (max-width: 768px) {
+
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .welcome-badge {
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .expense-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
 }
