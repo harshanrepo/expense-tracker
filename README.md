@@ -2,7 +2,7 @@
 
 A full-stack web application to track your daily expenses, built with Flask and PostgreSQL. Features a clean UI with user authentication, category breakdown, and real-time search.
 
-🌐 **Live Demo:** https://expense-tracker-1-augk.onrender.com
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://expense-tracker-1-augk.onrender.com)
 
 ---
 
