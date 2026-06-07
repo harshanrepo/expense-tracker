@@ -4,7 +4,9 @@
 <head>
     <title>SpendWise — Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
@@ -12,17 +14,21 @@
 
 <body>
 
+    <!-- ── Auth page: full-height centered flex layout ── -->
     <div class="auth-page">
 
+        <!-- Logo above the card -->
         <div class="auth-logo">
             <div class="logo-icon">💰</div>
             <div class="logo-text">Spend<span class="logo-dot">Wise</span></div>
         </div>
 
+        <!-- ── Register Card ── -->
         <div class="auth-card">
             <div class="auth-title">Create Account 🚀</div>
             <div class="auth-sub">Start tracking your expenses today</div>
 
+            <!-- POSTs to /register, handled by register() in app.py -->
             <form method="POST">
                 <div class="form-group">
                     <label class="form-label">Username</label>
@@ -33,6 +39,7 @@
                     <input class="form-input" type="password" name="password" placeholder="Choose a password" required>
                 </div>
 
+                <!-- Error shown when register() passes error= (e.g. username taken) -->
                 {% if error %}
                 <div class="auth-error">⚠️ {{ error }}</div>
                 {% endif %}
@@ -40,12 +47,13 @@
                 <button class="submit-btn" type="submit">Create Account</button>
             </form>
 
+            <!-- Link back to login -->
             <div class="auth-footer">
                 Already have an account? <a href="/login">Login here</a>
             </div>
         </div>
 
-    </div>
+    </div> <!-- /.auth-page -->
 
 </body>
 

@@ -4,7 +4,9 @@
 <head>
     <title>SpendWise — Edit Expense</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
@@ -14,30 +16,38 @@
 
     <div class="app">
 
+        <!-- ── Header: back link instead of welcome badge ── -->
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">💰</div>
                 <div class="logo-text">Spend<span class="logo-dot">Wise</span></div>
             </div>
+            <!-- Styled as welcome-badge but acts as a back button -->
             <a href="/" class="welcome-badge" style="text-decoration:none;">← Back to Dashboard</a>
         </div>
         
+        <!-- ── Edit Form: pre-filled with current expense values ── -->
         <div class="edit-wrap">
             <div class="panel">
                 <div class="panel-title">✏️ Edit Expense</div>
+                <!-- POSTs to /edit/<id>, handled by edit() in app.py -->
                 <form method="POST">
                     <div class="form-group">
                         <label class="form-label">Title</label>
+                        <!-- expense[1] = title column -->
                         <input class="form-input" type="text" name="title" value="{{ expense[1] }}" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Amount (₹)</label>
+                        <!-- expense[2] = amount column -->
                         <input class="form-input" type="number" name="amount" value="{{ expense[2] }}" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Category</label>
+                        <!-- expense[3] = category column -->
                         <input class="form-input" type="text" name="category" value="{{ expense[3] }}" required>
                     </div>
+                    <!-- Two-button row: Save + Cancel -->
                     <div class="btn-row">
                         <button class="submit-btn" type="submit">Save Changes</button>
                         <a href="/" class="cancel-btn">Cancel</a>
@@ -46,7 +56,7 @@
             </div>
         </div>
 
-    </div>
+    </div> <!-- /.app -->
 
 </body>
 

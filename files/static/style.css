@@ -1,11 +1,14 @@
-
+/* ── Google Fonts import: DM Sans (body) + Syne (headings) ── */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap');
 
+/* ── Global reset ── */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+/* ── Navbar ── */
 .navbar {
     display: flex;
     gap: 8px;
@@ -29,11 +32,14 @@
     color: #1a1a1a;
 }
 
+/* Active page highlight */
 .nav-link.active {
     background: #1D9E75;
     color: #fff;
     border-color: #0F6E56;
 }
+
+/* Logout pushed to far right, red tint */
 .nav-link.logout {
     margin-left: auto;
     color: #A32D2D;
@@ -44,19 +50,23 @@
 .nav-link.logout:hover {
     background: #ffe0e0;
 }
+
+/* ── Base: body + app container ── */
 body {
     font-family: 'DM Sans', Arial, sans-serif;
-    background-color: #f0f4f2;
+    background-color: #f0f4f2; /* Light green-grey page background */
     min-height: 100vh;
     color: #1a1a1a;
 }
 
+/* Centered content wrapper */
 .app {
     max-width: 960px;
     margin: 0 auto;
     padding: 1rem;
 }
 
+/* ── Header: logo left, badge right ── */
 .header {
     display: flex;
     align-items: center;
@@ -70,6 +80,7 @@ body {
     gap: 10px;
 }
 
+/* Green icon box */
 .logo-icon {
     width: 38px;
     height: 38px;
@@ -81,6 +92,7 @@ body {
     font-size: 18px;
 }
 
+/* Syne font for brand name */
 .logo-text {
     font-family: 'Syne', sans-serif;
     font-size: 22px;
@@ -88,10 +100,12 @@ body {
     color: #1a1a1a;
 }
 
+/* "Wise" part of logo in brand green */
 .logo-dot {
     color: #1D9E75;
 }
 
+/* Pill badge showing username */
 .welcome-badge {
     background: #ffffff;
     border: 1px solid #d8e8e2;
@@ -106,9 +120,10 @@ body {
     font-weight: 600;
 }
 
+/* ── Stats Grid: 4 summary cards ── */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive columns */
     gap: 12px;
     margin-bottom: 1.5rem;
 }
@@ -120,6 +135,7 @@ body {
     padding: 1rem 1.25rem;
 }
 
+/* First card — brand green highlight */
 .stat-card.highlight {
     background: #1D9E75;
     border-color: #0F6E56;
@@ -133,6 +149,7 @@ body {
     margin-bottom: 6px;
 }
 
+/* White text overrides on green card */
 .stat-card.highlight .stat-label {
     color: rgba(255, 255, 255, 0.75);
 }
@@ -147,6 +164,7 @@ body {
     color: #ffffff;
 }
 
+/* Smaller font for long category names */
 .top-cat {
     font-size: 16px;
     padding-top: 3px;
@@ -162,6 +180,7 @@ body {
     color: rgba(255, 255, 255, 0.65);
 }
 
+/* ── Search Bar ── */
 .search-bar {
     display: flex;
     gap: 8px;
@@ -169,7 +188,7 @@ body {
 }
 
 .search-input {
-    flex: 1;
+    flex: 1; /* Takes up remaining width */
     padding: 10px 14px;
     border: 1px solid #d8e8e2;
     border-radius: 8px;
@@ -181,6 +200,7 @@ body {
     transition: border-color 0.15s;
 }
 
+/* Green ring on focus */
 .search-input:focus {
     border-color: #1D9E75;
     box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.12);
@@ -203,6 +223,7 @@ body {
     background: #f0f4f2;
 }
 
+/* ── Main Grid: 2 columns (Add form + Breakdown) ── */
 .main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -211,23 +232,20 @@ body {
     margin-bottom: 1.25rem;
 }
 
+/* Stack to single column on narrow screens */
 @media (max-width: 620px) {
     .main-grid {
         grid-template-columns: 1fr;
     }
 }
 
-
+/* ── Panel: white card used throughout ── */
 .panel,
 .full-panel {
     background: #ffffff;
     border: 1px solid #d8e8e2;
     border-radius: 12px;
     padding: 1.25rem;
-}
-
-.full-panel {
-    margin-top: 0;
 }
 
 .panel-title {
@@ -237,6 +255,7 @@ body {
     margin-bottom: 1rem;
 }
 
+/* ── Form elements ── */
 .form-group {
     margin-bottom: 0.85rem;
 }
@@ -256,18 +275,20 @@ body {
     border-radius: 8px;
     font-size: 14px;
     font-family: inherit;
-    background: #f8fbfa;
+    background: #f8fbfa; /* Slightly tinted to look "inset" */
     color: #1a1a1a;
     outline: none;
     transition: border-color 0.15s;
 }
 
+/* Green ring + white bg on focus */
 .form-input:focus {
     border-color: #1D9E75;
     box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.12);
     background: #fff;
 }
 
+/* ── Primary action button ── */
 .submit-btn {
     width: 100%;
     padding: 10px;
@@ -284,9 +305,10 @@ body {
 }
 
 .submit-btn:hover {
-    background: #0F6E56;
+    background: #0F6E56; /* Darker green on hover */
 }
 
+/* ── Secondary cancel button (edit page) ── */
 .cancel-btn {
     flex: 1;
     display: block;
@@ -300,12 +322,14 @@ body {
     text-decoration: none;
     background: #fff;
     transition: background 0.15s;
-    margin:10px;
+    margin: 10px;
 }
 
 .cancel-btn:hover {
     background: #f0f4f2;
 }
+
+/* ── Category Breakdown rows ── */
 .cat-row {
     display: flex;
     align-items: center;
@@ -315,15 +339,16 @@ body {
 }
 
 .cat-row:last-child {
-    border-bottom: none;
+    border-bottom: none; /* Remove border on last row */
 }
 
 .cat-name {
     font-size: 13px;
     color: #1a1a1a;
-    min-width: 80px;
+    min-width: 80px; /* Fixed width so bars align */
 }
 
+/* Bar track (grey background) */
 .cat-bar-wrap {
     flex: 1;
     height: 6px;
@@ -332,11 +357,12 @@ body {
     overflow: hidden;
 }
 
+/* Bar fill — width set inline by Jinja2 calculation */
 .cat-bar {
     height: 100%;
     background: #1D9E75;
     border-radius: 4px;
-    transition: width 0.4s ease;
+    transition: width 0.4s ease; /* Smooth bar animation on load */
 }
 
 .cat-amt {
@@ -347,6 +373,7 @@ body {
     text-align: right;
 }
 
+/* ── Expense Table ── */
 .expense-table {
     width: 100%;
     border-collapse: collapse;
@@ -370,19 +397,23 @@ body {
     color: #1a1a1a;
 }
 
+/* No border on last row */
 .expense-table tbody tr:last-child td {
     border-bottom: none;
 }
 
+/* Subtle row hover highlight */
 .expense-table tbody tr:hover {
     background-color: #f8fbfa;
 }
 
+/* Amount in dark green to stand out */
 .amount-cell {
     font-weight: 600;
     color: #0F6E56;
 }
 
+/* Category pill badge in table */
 .cat-badge {
     background: #E1F5EE;
     color: #0F6E56;
@@ -392,6 +423,7 @@ body {
     border-radius: 20px;
 }
 
+/* Edit link (green) and Delete link (red) */
 .action-link {
     color: #1D9E75;
     font-size: 12px;
@@ -408,11 +440,13 @@ body {
     color: #A32D2D;
 }
 
+/* Separator between Edit | Delete */
 .divider {
     color: #ccc;
     margin: 0 5px;
 }
 
+/* Shown when no expenses exist */
 .empty-msg {
     font-size: 13px;
     color: #aaa;
@@ -420,6 +454,7 @@ body {
     text-align: center;
 }
 
+/* ── Auth pages (Login + Register): full-height centered layout ── */
 .auth-page {
     min-height: 100vh;
     display: flex;
@@ -436,13 +471,14 @@ body {
     margin-bottom: 1.5rem;
 }
 
+/* White card holding the login/register form */
 .auth-card {
     background: #ffffff;
     border: 1px solid #d8e8e2;
     border-radius: 14px;
     padding: 2rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* Constrain width on wide screens */
 }
 
 .auth-title {
@@ -459,6 +495,7 @@ body {
     margin-bottom: 1.5rem;
 }
 
+/* Red error box for wrong credentials / duplicate username */
 .auth-error {
     background: #fff0f0;
     border: 1px solid #f5c6c6;
@@ -469,6 +506,7 @@ body {
     margin-bottom: 12px;
 }
 
+/* "Don't have an account?" link row */
 .auth-footer {
     text-align: center;
     font-size: 13px;
@@ -486,6 +524,9 @@ body {
     text-decoration: underline;
 }
 
+/* ── About page ── */
+
+/* Full-width green hero banner */
 .about-hero {
     text-align: center;
     background: #1D9E75;
@@ -515,6 +556,7 @@ body {
     line-height: 1.6;
 }
 
+/* Semi-transparent version pill */
 .about-version {
     display: inline-block;
     background: rgba(255,255,255,0.2);
@@ -524,6 +566,7 @@ body {
     font-weight: 500;
 }
 
+/* Feature cards grid — responsive auto-fit */
 .about-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -539,11 +582,6 @@ body {
     text-align: center;
 }
 
-.feature-icon {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
 .feature-title {
     font-size: 14px;
     font-weight: 600;
@@ -557,7 +595,7 @@ body {
     line-height: 1.5;
 }
 
-
+/* 2-column grid: Built With + Developer */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -565,11 +603,12 @@ body {
     margin-bottom: 1.25rem;
 }
 
+/* Stack on mobile */
 @media (max-width: 620px) {
     .about-grid { grid-template-columns: 1fr; }
 }
 
-
+/* Tech stack pill badges row */
 .tech-row {
     display: flex;
     flex-wrap: wrap;
@@ -577,6 +616,7 @@ body {
     margin-top: 4px;
 }
 
+/* Green pill badge for each technology */
 .tech-badge {
     background: #E1F5EE;
     color: #0F6E56;
@@ -586,26 +626,11 @@ body {
     border-radius: 20px;
 }
 
-
 .dev-card {
     display: flex;
     align-items: flex-start;
     gap: 14px;
     margin-top: 4px;
-}
-
-.dev-avatar {
-    width: 44px;
-    height: 44px;
-    background: #1D9E75;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
 }
 
 .dev-name {
@@ -614,43 +639,43 @@ body {
     color: #1a1a1a;
 }
 
-.dev-role {
-    font-size: 12px;
-    color: #1D9E75;
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
 .dev-desc {
     font-size: 12px;
     color: #888;
     line-height: 1.5;
 }
 
+/* Page footer on about page */
 .about-footer {
     text-align: center;
     font-size: 12px;
     color: #aaa;
     padding: 1rem 0 0.5rem;
 }
+
+/* ── Responsive overrides (tablet/mobile) ── */
 @media (max-width: 768px) {
 
+    /* Stack header vertically */
     .header {
         flex-direction: column;
         gap: 12px;
         text-align: center;
     }
 
+    /* Wrap nav links */
     .navbar {
         flex-wrap: wrap;
         justify-content: center;
     }
 
+    /* Full-width badge on mobile */
     .welcome-badge {
         width: 100%;
         text-align: center;
     }
 
+    /* Stack search bar vertically */
     .search-bar {
         flex-direction: column;
     }
@@ -659,15 +684,19 @@ body {
         width: 100%;
     }
 
+    /* Horizontal scroll for wide tables on small screens */
     .expense-table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
     }
+
+    /* Reduce padding on auth card */
     .auth-card {
         padding: 1.25rem;
     }
 
+    /* Reduce hero padding */
     .about-hero {
         padding: 1.5rem 1rem;
     }

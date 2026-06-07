@@ -4,15 +4,20 @@
 <head>
     <title>SpendWise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <!-- Google Fonts: DM Sans for body, Syne for headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 </head>
     
 <body>
-    <div class="app">
+    <div class="app"> <!-- Main container, max-width centered -->
+
+        <!-- ── Header: logo + welcome badge ── -->
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">💰</div>
@@ -21,30 +26,40 @@
             <div class="welcome-badge">Hey, <span>{{ name }}</span> 👋</div>
         </div>
 
+        <!-- ── Navbar ── -->
         <div class="navbar">
             <a class="nav-link active" href="/">Dashboard</a>
             <a class="nav-link" href="/about">About</a>
             <a class="nav-link" href="/login">Login</a>
             <a class="nav-link" href="/register">Register</a>
-            <a class="nav-link logout" href="/logout">Logout</a>
+            <a class="nav-link logout" href="/logout">Logout</a> <!-- Pushed right via margin-left: auto -->
         </div>
 
+        <!-- ── Stats Grid: 4 summary cards ── -->
         <div class="stats-grid">
+
+            <!-- Total spent — highlighted green card -->
             <div class="stat-card highlight">
                 <div class="stat-label">Total Spent</div>
                 <div class="stat-value">₹{{ total_amount }}</div>
                 <div class="stat-sub">This month</div>
             </div>
+
+            <!-- Number of expense entries -->
             <div class="stat-card">
                 <div class="stat-label">Transactions</div>
                 <div class="stat-value">{{ expenses | length }}</div>
                 <div class="stat-sub">Entries logged</div>
             </div>
+
+            <!-- Number of unique categories -->
             <div class="stat-card">
                 <div class="stat-label">Categories</div>
                 <div class="stat-value">{{ category_expenses | length }}</div>
                 <div class="stat-sub">Active</div>
             </div>
+
+            <!-- Top spending category (first item from DB, already sorted DESC) -->
             <div class="stat-card">
                 <div class="stat-label">Top Category</div>
                 <div class="stat-value top-cat">
@@ -60,8 +75,10 @@
                     {% endif %}
                 </div>
             </div>
+
         </div>
 
+        <!-- ── Search Bar (GET form — does not clear on refresh) ── -->
         <form method="get" class="search-bar">
             <input class="search-input" type="text" name="search"
                 value="{{ search if search else '' }}"
@@ -69,10 +86,13 @@
             <button class="search-btn" type="submit">Search</button>
         </form>
 
+        <!-- ── Main Grid: Add Expense form + Category Breakdown ── -->
         <div class="main-grid">
+
+            <!-- Left panel: Add Expense form -->
             <div class="panel">
                 <div class="panel-title">Add Expense</div>
-                <form method="POST">
+                <form method="POST"> <!-- POSTs to "/" handled in home() -->
                     <div class="form-group">
                         <label class="form-label">Title</label>
                         <input class="form-input" type="text" name="title" placeholder="e.g. Coffee, Petrol…" required>
@@ -89,13 +109,15 @@
                 </form>
             </div>
 
+            <!-- Right panel: Category Breakdown bars -->
             <div class="panel">
                 <div class="panel-title">Category Breakdown</div>
                 {% if category_expenses %}
-                    {% set max_amt = category_expenses[0][1] %}
+                    {% set max_amt = category_expenses[0][1] %} <!-- Max amount used to scale bar widths -->
                     {% for item in category_expenses %}
                     <div class="cat-row">
                         <span class="cat-name">{{ item[0] }}</span>
+                        <!-- Bar width = (this category / max category) * 100% -->
                         <div class="cat-bar-wrap">
                             <div class="cat-bar" style="width: {{ ((item[1] | float / max_amt | float) * 100) | int }}%"></div>
                         </div>
@@ -109,6 +131,7 @@
 
         </div>
 
+        <!-- ── Full-width Expenses Table ── -->
         <div class="full-panel">
             <div class="panel-title">All Expenses</div>
             {% if expenses %}
@@ -126,6 +149,7 @@
                     <tr>
                         <td>{{ expense[1] }}</td>
                         <td class="amount-cell">₹{{ expense[2] }}</td>
+                        <!-- Category shown as a green pill badge -->
                         <td><span class="cat-badge">{{ expense[3] }}</span></td>
                         <td>
                             <a class="action-link" href="/edit/{{ expense[0] }}">Edit</a>
@@ -141,7 +165,7 @@
             {% endif %}
         </div>
 
-    </div>
+    </div> <!-- /.app -->
 
 </body>
 

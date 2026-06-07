@@ -4,7 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+# ── Connection factory ─────────────────────────────────────────────
 def get_connection():
+    """Create and return a new PostgreSQL connection using env vars."""
     return psycopg2.connect(
         host=os.getenv("DB_HOST"),
         database=os.getenv("DB_NAME"),
@@ -13,80 +16,98 @@ def get_connection():
         port=os.getenv("DB_PORT", "5432")
     )
 
-def add_expenses(title,amount,category,user_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute("INSERT INTO expenses(title, amount, category,user_id) VALUES (%s, %s, %s,%s)",(title, amount, category,user_id))
-    conn.commit()
-    cursor.close()
-    conn.close()
+
+# ── Expenses CRUD ──────────────────────────────────────────────────
+def add_expenses(title, amount, category, user_id):
+    """Insert a new expense row for the given user."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO expenses (title, amount, category, user_id) VALUES (%s, %s, %s, %s)",
+                (title, amount, category, user_id)
+            )
 
 
 def get_expenses(user_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('select id,title,amount,category from expenses where user_id=%s',(user_id,))
-    expenses=cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return expenses
+    """Fetch all expenses for a user, newest first."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "SELECT id, title, amount, category FROM expenses WHERE user_id = %s ORDER BY id DESC",
+                (user_id,)
+            )
+            return cursor.fetchall()
+
 
 def delete_expenses(expense_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('delete from expenses where id= %s',(expense_id,))
-    conn.commit()
-    cursor.close()
-    conn.close()
+    """Delete a single expense by its ID."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("DELETE FROM expenses WHERE id = %s", (expense_id,))
 
-def update_expenses(expense_id,title,amount,category):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('update expenses set title=%s, amount=%s, category=%s where id=%s',(title,amount,category,expense_id))
-    conn.commit()
-    cursor.close()
-    conn.close()
+
+def update_expenses(expense_id, title, amount, category):
+    """Update title, amount, and category for a given expense."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "UPDATE expenses SET title = %s, amount = %s, category = %s WHERE id = %s",
+                (title, amount, category, expense_id)
+            )
+
 
 def get_expense(expense_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('select id,title,amount,category from expenses where id=%s',(expense_id,))
-    expense=cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return expense
+    """Fetch a single expense row by ID."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "SELECT id, title, amount, category FROM expenses WHERE id = %s",
+                (expense_id,)
+            )
+            return cursor.fetchone()
 
-def search_expense(search_term,user_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('select id,title,amount,category from expenses where user_id=%s and (title ILIKE %s or category ILIKE %s)',(user_id,f'%{search_term}%',f'%{search_term}%'))
-    expenses=cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return expenses 
+
+def search_expense(search_term, user_id):
+    """Search expenses by title or category (case-insensitive)."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """SELECT id, title, amount, category FROM expenses
+                   WHERE user_id = %s AND (title ILIKE %s OR category ILIKE %s)""",
+                (user_id, f"%{search_term}%", f"%{search_term}%")
+            )
+            return cursor.fetchall()
+
 
 def get_category_expenses(user_id):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('select category,sum(amount) from expenses where user_id=%s group by category ORDER BY SUM(amount) DESC',(user_id,))
-    category_expenses=cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return category_expenses
+    """Return total spending per category for a user, highest first."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """SELECT category, SUM(amount) FROM expenses
+                   WHERE user_id = %s GROUP BY category ORDER BY SUM(amount) DESC""",
+                (user_id,)
+            )
+            return cursor.fetchall()
 
-def create_user(username,password_hash):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('insert into users(username,password) values(%s,%s)',(username,password_hash))
-    conn.commit()
-    cursor.close()
-    conn.close()
+
+# ── Users ──────────────────────────────────────────────────────────
+def create_user(username, password_hash):
+    """Insert a new user with a hashed password."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO users (username, password) VALUES (%s, %s)",
+                (username, password_hash)
+            )
+
 
 def get_user_by_username(username):
-    conn=get_connection()
-    cursor=conn.cursor()
-    cursor.execute('select id,username,password from users where username ILIKE %s',(username,))
-    user=cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return user
+    """Fetch a user row by username (case-insensitive)."""
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "SELECT id, username, password FROM users WHERE username ILIKE %s",
+                (username,)
+            )
+            return cursor.fetchone()
